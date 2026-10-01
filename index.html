@@ -731,8 +731,7 @@ renderAll();
 </script>
 <script type="module">
   import { initializeApp } from "https://www.gstatic.com/firebasejs/12.9.0/firebase-app.js";
-  import { getFirestore } from "https://www.gstatic.com/firebasejs/12.9.0/firebase-firestore.js";
-
+import { getFirestore, collection, doc, setDoc, getDocs, deleteDoc } from "https://www.gstatic.com/firebasejs/12.9.0/firebase-firestore.js";
   const firebaseConfig = {
     apiKey: "AIzaSyAv_jZpT9o-ityAznSdKRosaRfTCA4MLpQ",
     authDomain: "uni-nest-44b3d.firebaseapp.com",
@@ -744,6 +743,16 @@ renderAll();
 
   const app = initializeApp(firebaseConfig);
   const db = getFirestore(app);
+  window.saveStudentsToFirebase = async function(students) {
+  for (const student of students) {
+    await setDoc(doc(db, "students", String(student.id)), student);
+  }
+};
+
+window.loadStudentsFromFirebase = async function() {
+  const snapshot = await getDocs(collection(db, "students"));
+  return snapshot.docs.map(d => d.data());
+};
 </script>
 </body>
 </html>
