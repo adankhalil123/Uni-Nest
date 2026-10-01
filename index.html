@@ -729,6 +729,21 @@ document.querySelectorAll(".modal").forEach(m=>{
 
 renderAll();
 </script>
+<script type="module">
+  import { initializeApp } from "https://www.gstatic.com/firebasejs/12.9.0/firebase-app.js";
+  import { getFirestore } from "https://www.gstatic.com/firebasejs/12.9.0/firebase-firestore.js";
 
+  const firebaseConfig = {
+    apiKey: "AIzaSyAv_jZpT9o-ityAznSdKRosaRfTCA4MLpQ",
+    authDomain: "uni-nest-44b3d.firebaseapp.com",
+    projectId: "uni-nest-44b3d",
+    storageBucket: "uni-nest-44b3d.firebasestorage.app",
+    messagingSenderId: "162219460268",
+    appId: "1:162219460268:web:b035b47d104d989c33c109"
+  };
+
+  const app = initializeApp(firebaseConfig);
+  const db = getFirestore(app);
+</script>
 </body>
 </html>
