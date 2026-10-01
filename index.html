@@ -2,405 +2,732 @@
 <html lang="ar" dir="rtl">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="default">
+<meta name="apple-mobile-web-app-title" content="UNI NEST">
 <title>UNI NEST</title>
 
 <style>
 *{box-sizing:border-box}
 body{
   margin:0;
-  font-family:Arial,Tahoma,sans-serif;
-  background:#f7f5f8;
-  color:#262329;
-  padding-bottom:90px;
+  font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Arial,sans-serif;
+  background:#f6f3fb;
+  color:#26222b;
 }
-header{
-  background:linear-gradient(135deg,#a817ba,#d85bd4);
+.header{
+  background:linear-gradient(135deg,#6d3b91,#9b6bb8);
   color:white;
-  padding:26px 20px 32px;
-  border-radius:0 0 30px 30px;
+  padding:28px 18px 25px;
+  border-radius:0 0 28px 28px;
 }
-header h1{margin:0;font-size:28px}
-header p{margin:7px 0 0;opacity:.9}
-
-.container{padding:18px;max-width:900px;margin:auto}
-
+.header h1{margin:0;font-size:29px;letter-spacing:1px}
+.header p{margin:5px 0 0;opacity:.9}
+.container{max-width:900px;margin:auto;padding:16px 16px 100px}
 .cards{
   display:grid;
   grid-template-columns:repeat(3,1fr);
   gap:10px;
-  margin-bottom:20px;
+  margin-top:-5px;
 }
 .card{
   background:white;
   border-radius:18px;
-  padding:17px 10px;
-  box-shadow:0 4px 18px #0000000b;
+  padding:16px 8px;
   text-align:center;
+  box-shadow:0 3px 15px rgba(0,0,0,.06);
 }
-.card .num{
-  font-size:21px;
-  font-weight:bold;
-  margin-top:8px;
-}
+.card .num{font-size:22px;font-weight:800;color:#6d3b91}
 .card small{color:#777}
-
-.section{
+.section-title{font-size:20px;font-weight:800;margin:24px 2px 12px}
+.student{
   background:white;
-  border-radius:20px;
-  padding:18px;
-  margin-bottom:15px;
-  box-shadow:0 4px 18px #0000000b;
-}
-.section h2{margin:0 0 15px;font-size:20px}
-
-input{
-  width:100%;
-  padding:13px;
-  border:1px solid #e5e0e7;
-  background:#faf9fb;
-  border-radius:12px;
-  font-size:16px;
+  padding:15px;
   margin-bottom:10px;
+  border-radius:16px;
+  box-shadow:0 2px 10px rgba(0,0,0,.05);
+  cursor:pointer;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
 }
+.student-name{font-weight:800;font-size:17px}
+.student-info{font-size:13px;color:#777;margin-top:4px}
+.status{
+  padding:7px 10px;
+  border-radius:20px;
+  font-size:12px;
+  font-weight:800;
+  white-space:nowrap;
+}
+.paid{background:#dcf8e7;color:#16864a}
+.unpaid{background:#ffe3e3;color:#c52c2c}
+.partial{background:#fff0cc;color:#a46700}
 button{
   border:0;
-  border-radius:12px;
-  padding:12px 16px;
+  border-radius:13px;
+  padding:12px 15px;
   font-size:15px;
+  font-weight:700;
   cursor:pointer;
 }
-.primary{
-  background:#b31cc2;
-  color:white;
+.primary{background:#754398;color:white}
+.secondary{background:#eee6f5;color:#633480}
+.danger{background:#ffe5e5;color:#bd2525}
+.full{width:100%}
+.add-btn{
   width:100%;
-  font-weight:bold;
-}
-.student{
-  border:1px solid #eee8ef;
-  border-radius:15px;
-  padding:15px;
-  margin:10px 0;
-}
-.student-top{
-  display:flex;
-  justify-content:space-between;
-  gap:10px;
-  align-items:center;
-}
-.student h3{margin:0 0 5px}
-.muted{color:#777;font-size:14px}
-
-.months{
-  display:grid;
-  grid-template-columns:repeat(3,1fr);
-  gap:7px;
-  margin-top:13px;
-}
-.month{
-  background:#f4f1f5;
-  padding:9px 4px;
-  text-align:center;
-  border-radius:10px;
-  font-size:13px;
-}
-.month.paid{
-  background:#dcf7e5;
-  color:#147b38;
-}
-.month.unpaid{
-  background:#ffe8e8;
-  color:#b62828;
-}
-.actions{
-  display:flex;
-  gap:7px;
   margin-top:12px;
+  background:#754398;
+  color:white;
+  font-size:16px;
 }
-.pay{
-  background:#e6f8eb;
-  color:#147b38;
-  flex:1;
-}
-.delete{
-  background:#fff0f0;
-  color:#b32626;
-}
-
-.empty{
-  text-align:center;
-  color:#888;
-  padding:25px 5px;
-}
-
-nav{
+.bottom{
   position:fixed;
-  bottom:0;
-  left:0;
-  right:0;
-  height:72px;
+  bottom:0;left:0;right:0;
   background:white;
   display:flex;
   justify-content:space-around;
-  align-items:center;
-  box-shadow:0 -3px 18px #00000012;
-  z-index:10;
+  padding:9px 4px calc(9px + env(safe-area-inset-bottom));
+  border-top:1px solid #eee;
+  z-index:20;
 }
-nav button{
-  background:none;
+.nav{
+  flex:1;
+  text-align:center;
   color:#777;
-  padding:8px 15px;
+  font-size:13px;
+  cursor:pointer;
 }
-nav button.active{color:#b31cc2;font-weight:bold}
-
+.nav span{display:block;font-size:21px;margin-bottom:2px}
+.nav.active{color:#754398;font-weight:800}
 .page{display:none}
 .page.active{display:block}
-
-.payment-row{
+.empty{
+  background:white;
+  padding:35px 15px;
+  text-align:center;
+  border-radius:18px;
+  color:#888;
+}
+.modal{
+  display:none;
+  position:fixed;
+  inset:0;
+  background:rgba(0,0,0,.42);
+  z-index:50;
+  align-items:flex-end;
+  justify-content:center;
+}
+.modal.show{display:flex}
+.modal-box{
+  background:#faf9fc;
+  width:100%;
+  max-width:650px;
+  max-height:92vh;
+  overflow:auto;
+  border-radius:25px 25px 0 0;
+  padding:20px 18px 35px;
+}
+.modal-head{
   display:flex;
   justify-content:space-between;
-  border-bottom:1px solid #eee;
-  padding:12px 0;
+  align-items:center;
+  margin-bottom:15px;
 }
-.status-paid{
-  background:#dcf7e5;
-  color:#147b38;
-  padding:4px 9px;
+.modal-head h2{margin:0}
+.close{
+  width:38px;height:38px;
+  border-radius:50%;
+  background:#eee;
+  padding:0;
+}
+label{display:block;font-weight:700;margin:12px 2px 6px}
+input,select,textarea{
+  width:100%;
+  border:1px solid #ddd;
+  border-radius:12px;
+  padding:12px;
+  font-size:16px;
+  background:white;
+}
+.grid2{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.profile-top{
+  background:linear-gradient(135deg,#754398,#a779c2);
+  color:white;
+  padding:20px;
   border-radius:20px;
+  margin-bottom:14px;
+}
+.profile-top h2{margin:0 0 5px}
+.month-box{
+  background:white;
+  border-radius:17px;
+  margin-bottom:11px;
+  padding:14px;
+  box-shadow:0 2px 9px rgba(0,0,0,.05);
+}
+.month-head{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+}
+.money-row{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:8px;
+  margin-top:10px;
+}
+.money-item{
+  background:#f7f4f9;
+  padding:10px;
+  border-radius:12px;
   font-size:13px;
 }
-
-@media(max-width:600px){
-  .cards{grid-template-columns:1fr}
-  .months{grid-template-columns:repeat(3,1fr)}
+.money-item strong{display:block;font-size:16px;margin-top:3px}
+.payments-item{
+  background:white;
+  border-radius:15px;
+  padding:14px;
+  margin-bottom:9px;
+}
+.note{font-size:12px;color:#777;margin-top:6px}
+.backup{
+  background:white;
+  padding:17px;
+  border-radius:17px;
+  margin-top:15px;
+}
+@media(max-width:500px){
+ .cards{grid-template-columns:repeat(3,1fr)}
+ .card{padding:13px 4px}
+ .card .num{font-size:18px}
+ .card small{font-size:11px}
 }
 </style>
 </head>
 
 <body>
 
-<header>
+<div class="header">
   <h1>UNI NEST</h1>
   <p>إدارة سكن الطالبات</p>
-</header>
+</div>
 
 <div class="container">
 
 <div id="home" class="page active">
   <div class="cards">
     <div class="card">
+      <div class="num" id="studentsCount">0</div>
       <small>عدد الطالبات</small>
-      <div class="num" id="studentCount">0</div>
     </div>
     <div class="card">
+      <div class="num" id="rentTotal">₪0</div>
       <small>الإيجار الشهري</small>
-      <div class="num" id="monthlyTotal">0 ₪</div>
     </div>
     <div class="card">
+      <div class="num" id="dueTotal">₪0</div>
       <small>المبلغ المستحق</small>
-      <div class="num" id="owedTotal">0 ₪</div>
     </div>
   </div>
 
-  <div class="section">
-    <h2>نظرة عامة</h2>
-    <div id="overview"></div>
-  </div>
+  <div class="section-title">حالة هذا الشهر</div>
+  <div id="homeStudents"></div>
+  <button class="add-btn" onclick="openAddStudent()">＋ إضافة طالبة جديدة</button>
 </div>
 
 <div id="students" class="page">
-  <div class="section">
-    <h2>إضافة طالبة</h2>
-    <input id="name" placeholder="اسم الطالبة">
-    <input id="room" placeholder="رقم الغرفة">
-    <input id="rent" type="number" placeholder="الإيجار الشهري">
-    <label class="muted">تاريخ الدخول</label>
-    <input id="moveIn" type="date">
-    <button class="primary" onclick="addStudent()">إضافة الطالبة</button>
-  </div>
-
-  <div class="section">
-    <h2>الطالبات</h2>
-    <div id="studentsList"></div>
-  </div>
+  <div class="section-title">الطالبات</div>
+  <div id="studentsList"></div>
+  <button class="add-btn" onclick="openAddStudent()">＋ إضافة طالبة جديدة</button>
 </div>
 
 <div id="payments" class="page">
-  <div class="section">
-    <h2>سجل الدفعات</h2>
-    <div id="paymentsList"></div>
+  <div class="section-title">سجل الدفعات</div>
+  <div id="paymentsList"></div>
+</div>
+
+<div id="settings" class="page">
+  <div class="section-title">النسخة الاحتياطية</div>
+  <div class="backup">
+    <b>حماية بيانات UNI NEST</b>
+    <p class="note">نزّلي نسخة احتياطية بشكل دوري حتى تقدري ترجعي بيانات الطالبات والدفعات إذا غيرتي الجهاز.</p>
+    <button class="primary full" onclick="backupData()">تنزيل نسخة احتياطية</button>
+    <br><br>
+    <button class="secondary full" onclick="document.getElementById('restoreFile').click()">استرجاع نسخة احتياطية</button>
+    <input id="restoreFile" type="file" accept=".json" style="display:none" onchange="restoreData(event)">
   </div>
 </div>
 
 </div>
 
-<nav>
-  <button onclick="showPage('home',this)" class="active">⌂<br>الرئيسية</button>
-  <button onclick="showPage('students',this)">👩🏻‍🎓<br>الطالبات</button>
-  <button onclick="showPage('payments',this)">▣<br>الدفعات</button>
-</nav>
+<div class="bottom">
+  <div class="nav active" onclick="showPage('home',this)"><span>⌂</span>الرئيسية</div>
+  <div class="nav" onclick="showPage('students',this)"><span>👩🏻</span>الطالبات</div>
+  <div class="nav" onclick="showPage('payments',this)"><span>₪</span>الدفعات</div>
+  <div class="nav" onclick="showPage('settings',this)"><span>⚙</span>النسخ</div>
+</div>
+
+<!-- إضافة طالبة -->
+<div id="studentModal" class="modal">
+<div class="modal-box">
+  <div class="modal-head">
+    <h2>إضافة طالبة</h2>
+    <button class="close" onclick="closeModal('studentModal')">×</button>
+  </div>
+
+  <label>اسم الطالبة *</label>
+  <input id="newName" placeholder="الاسم الكامل">
+
+  <div class="grid2">
+    <div>
+      <label>رقم الغرفة</label>
+      <input id="newRoom" placeholder="مثال: 3">
+    </div>
+    <div>
+      <label>رقم الهاتف</label>
+      <input id="newPhone" placeholder="05...">
+    </div>
+  </div>
+
+  <label>الإيجار الشهري ₪ *</label>
+  <input id="newRent" type="number" inputmode="decimal" placeholder="مثال: 1500">
+
+  <label>تاريخ الدخول</label>
+  <input id="newDate" type="date">
+
+  <button class="primary full" style="margin-top:20px" onclick="addStudent()">حفظ الطالبة</button>
+</div>
+</div>
+
+<!-- ملف الطالبة -->
+<div id="profileModal" class="modal">
+<div class="modal-box">
+  <div class="modal-head">
+    <h2>ملف الطالبة</h2>
+    <button class="close" onclick="closeModal('profileModal')">×</button>
+  </div>
+  <div id="profileContent"></div>
+</div>
+</div>
+
+<!-- تسجيل شهر -->
+<div id="paymentModal" class="modal">
+<div class="modal-box">
+  <div class="modal-head">
+    <h2 id="paymentTitle">تسجيل دفعة</h2>
+    <button class="close" onclick="closeModal('paymentModal')">×</button>
+  </div>
+
+  <input id="payStudentId" type="hidden">
+
+  <div class="grid2">
+    <div>
+      <label>الشهر</label>
+      <select id="payMonth"></select>
+    </div>
+    <div>
+      <label>السنة</label>
+      <select id="payYear"></select>
+    </div>
+  </div>
+
+  <label>الإيجار المطلوب ₪</label>
+  <input id="rentRequired" type="number" inputmode="decimal">
+
+  <label>المبلغ المدفوع للإيجار ₪</label>
+  <input id="rentPaid" type="number" inputmode="decimal" value="0">
+
+  <label>الكهرباء المطلوبة ₪</label>
+  <input id="electricRequired" type="number" inputmode="decimal" value="0">
+
+  <label>المبلغ المدفوع للكهرباء ₪</label>
+  <input id="electricPaid" type="number" inputmode="decimal" value="0">
+
+  <label>تاريخ الدفع</label>
+  <input id="paymentDate" type="date">
+
+  <label>ملاحظات</label>
+  <textarea id="paymentNote" rows="2" placeholder="اختياري"></textarea>
+
+  <button class="primary full" style="margin-top:18px" onclick="savePayment()">حفظ الدفعة</button>
+</div>
+</div>
 
 <script>
 const months=[
-"يناير","فبراير","مارس","أبريل","مايو","يونيو",
-"يوليو","أغسطس","سبتمبر","أكتوبر","نوفمبر","ديسمبر"
+ "يناير","فبراير","مارس","أبريل","مايو","يونيو",
+ "يوليو","أغسطس","سبتمبر","أكتوبر","نوفمبر","ديسمبر"
 ];
 
-let students=JSON.parse(localStorage.getItem("uniNestStudents")||"[]");
-let payments=JSON.parse(localStorage.getItem("uniNestPayments")||"[]");
+let students=JSON.parse(localStorage.getItem("uninest_students")||"[]");
+let payments=JSON.parse(localStorage.getItem("uninest_payments")||"[]");
+let currentProfile=null;
 
 function save(){
-  localStorage.setItem("uniNestStudents",JSON.stringify(students));
-  localStorage.setItem("uniNestPayments",JSON.stringify(payments));
+ localStorage.setItem("uninest_students",JSON.stringify(students));
+ localStorage.setItem("uninest_payments",JSON.stringify(payments));
+ renderAll();
 }
 
-function showPage(id,btn){
-  document.querySelectorAll(".page").forEach(p=>p.classList.remove("active"));
-  document.getElementById(id).classList.add("active");
-  document.querySelectorAll("nav button").forEach(b=>b.classList.remove("active"));
-  btn.classList.add("active");
-  render();
+function money(n){
+ return "₪"+Number(n||0).toLocaleString();
+}
+
+function currentKey(){
+ const d=new Date();
+ return {month:d.getMonth(),year:d.getFullYear()};
+}
+
+function getRecord(studentId,month,year){
+ return payments.find(p=>p.studentId==studentId && p.month==month && p.year==year);
+}
+
+function calcStatus(student,month,year){
+ const p=getRecord(student.id,month,year);
+ const rentReq=p ? Number(p.rentRequired||0) : Number(student.rent||0);
+ const elecReq=p ? Number(p.electricRequired||0) : 0;
+ const required=rentReq+elecReq;
+ const paid=p ? Number(p.rentPaid||0)+Number(p.electricPaid||0) : 0;
+
+ if(required>0 && paid>=required) return {text:"مدفوع ✓",cls:"paid",due:0};
+ if(paid>0) return {text:"دفع جزئي",cls:"partial",due:Math.max(required-paid,0)};
+ return {text:"غير مدفوع",cls:"unpaid",due:required};
+}
+
+function renderAll(){
+ renderHome();
+ renderStudents();
+ renderPayments();
+ if(currentProfile) renderProfile(currentProfile);
+}
+
+function renderHome(){
+ const now=currentKey();
+ document.getElementById("studentsCount").textContent=students.length;
+
+ const rent=students.reduce((a,s)=>a+Number(s.rent||0),0);
+ document.getElementById("rentTotal").textContent=money(rent);
+
+ let due=0;
+ students.forEach(s=>due+=calcStatus(s,now.month,now.year).due);
+ document.getElementById("dueTotal").textContent=money(due);
+
+ const box=document.getElementById("homeStudents");
+
+ if(!students.length){
+   box.innerHTML='<div class="empty">السكن جديد ولا توجد طالبات مسجلات حالياً</div>';
+   return;
+ }
+
+ box.innerHTML=students.map(s=>{
+   const st=calcStatus(s,now.month,now.year);
+   return `
+   <div class="student" onclick="openProfile('${s.id}')">
+     <div>
+       <div class="student-name">${escapeHtml(s.name)}</div>
+       <div class="student-info">غرفة ${escapeHtml(s.room||"-")} • ${months[now.month]} ${now.year}</div>
+     </div>
+     <div class="status ${st.cls}">${st.text}</div>
+   </div>`;
+ }).join("");
+}
+
+function renderStudents(){
+ const box=document.getElementById("studentsList");
+ if(!students.length){
+   box.innerHTML='<div class="empty">لا توجد طالبات بعد</div>';
+   return;
+ }
+ const now=currentKey();
+ box.innerHTML=students.map(s=>{
+   const st=calcStatus(s,now.month,now.year);
+   return `
+   <div class="student" onclick="openProfile('${s.id}')">
+    <div>
+      <div class="student-name">${escapeHtml(s.name)}</div>
+      <div class="student-info">غرفة ${escapeHtml(s.room||"-")} • الإيجار ${money(s.rent)}</div>
+    </div>
+    <div class="status ${st.cls}">${st.text}</div>
+   </div>`;
+ }).join("");
+}
+
+function renderPayments(){
+ const box=document.getElementById("paymentsList");
+ const list=[...payments].sort((a,b)=>{
+   if(b.year!==a.year)return b.year-a.year;
+   return b.month-a.month;
+ });
+
+ if(!list.length){
+   box.innerHTML='<div class="empty">لا توجد دفعات مسجلة بعد</div>';
+   return;
+ }
+
+ box.innerHTML=list.map(p=>{
+   const s=students.find(x=>x.id==p.studentId);
+   if(!s)return "";
+   const total=Number(p.rentPaid||0)+Number(p.electricPaid||0);
+   return `
+   <div class="payments-item" onclick="openProfile('${s.id}')">
+     <b>${escapeHtml(s.name)}</b>
+     <div class="student-info">${months[p.month]} ${p.year}</div>
+     <div style="margin-top:7px">
+       إيجار: <b>${money(p.rentPaid)}</b> • كهرباء: <b>${money(p.electricPaid)}</b>
+     </div>
+     <div style="margin-top:5px;color:#16864a;font-weight:800">المجموع: ${money(total)}</div>
+   </div>`;
+ }).join("");
+}
+
+function openAddStudent(){
+ document.getElementById("newName").value="";
+ document.getElementById("newRoom").value="";
+ document.getElementById("newPhone").value="";
+ document.getElementById("newRent").value="";
+ document.getElementById("newDate").value=new Date().toISOString().split("T")[0];
+ openModal("studentModal");
 }
 
 function addStudent(){
-  const name=document.getElementById("name").value.trim();
-  const room=document.getElementById("room").value.trim();
-  const rent=Number(document.getElementById("rent").value);
-  const moveIn=document.getElementById("moveIn").value;
+ const name=document.getElementById("newName").value.trim();
+ const rent=Number(document.getElementById("newRent").value);
 
-  if(!name || !room || !rent || !moveIn){
-    alert("أدخلي جميع بيانات الطالبة");
-    return;
-  }
+ if(!name || !rent){
+   alert("اكتبي اسم الطالبة وقيمة الإيجار الشهري.");
+   return;
+ }
 
-  students.push({
-    id:Date.now(),
-    name,
-    room,
-    rent,
-    moveIn
-  });
+ students.push({
+   id:Date.now().toString(),
+   name,
+   room:document.getElementById("newRoom").value.trim(),
+   phone:document.getElementById("newPhone").value.trim(),
+   rent,
+   startDate:document.getElementById("newDate").value
+ });
 
-  save();
+ save();
+ closeModal("studentModal");
+}
 
-  document.getElementById("name").value="";
-  document.getElementById("room").value="";
-  document.getElementById("rent").value="";
-  document.getElementById("moveIn").value="";
+function openProfile(id){
+ currentProfile=id;
+ renderProfile(id);
+ openModal("profileModal");
+}
 
-  render();
+function renderProfile(id){
+ const s=students.find(x=>x.id==id);
+ if(!s)return;
+
+ const now=currentKey();
+
+ let records="";
+ const years=[now.year,now.year-1];
+
+ years.forEach(year=>{
+   for(let m=11;m>=0;m--){
+     if(year==now.year && m>now.month)continue;
+
+     const p=getRecord(id,m,year);
+     const st=calcStatus(s,m,year);
+
+     const rentPaid=p?Number(p.rentPaid||0):0;
+     const electricReq=p?Number(p.electricRequired||0):0;
+     const electricPaid=p?Number(p.electricPaid||0):0;
+
+     records+=`
+     <div class="month-box" onclick="openPayment('${id}',${m},${year})">
+       <div class="month-head">
+         <b>${months[m]} ${year}</b>
+         <span class="status ${st.cls}">${st.text}</span>
+       </div>
+
+       <div class="money-row">
+        <div class="money-item">
+          الإيجار
+          <strong>${money(rentPaid)} / ${money(p?p.rentRequired:s.rent)}</strong>
+        </div>
+        <div class="money-item">
+          الكهرباء
+          <strong>${money(electricPaid)} / ${money(electricReq)}</strong>
+        </div>
+       </div>
+
+       ${st.due>0?`<div class="note">المتبقي: ${money(st.due)}</div>`:""}
+     </div>`;
+   }
+ });
+
+ document.getElementById("profileContent").innerHTML=`
+   <div class="profile-top">
+     <h2>${escapeHtml(s.name)}</h2>
+     <div>الغرفة: ${escapeHtml(s.room||"-")}</div>
+     <div>الهاتف: ${escapeHtml(s.phone||"-")}</div>
+     <div>الإيجار الشهري: ${money(s.rent)}</div>
+   </div>
+
+   <button class="primary full" onclick="openPayment('${s.id}',${now.month},${now.year})">
+     ＋ تسجيل / تعديل دفعة هذا الشهر
+   </button>
+
+   <div class="section-title">السجل الشهري</div>
+   ${records}
+
+   <button class="danger full" onclick="deleteStudent('${s.id}')">حذف الطالبة</button>
+ `;
+}
+
+function openPayment(id,month,year){
+ const s=students.find(x=>x.id==id);
+ if(!s)return;
+
+ document.getElementById("payStudentId").value=id;
+
+ const monthSelect=document.getElementById("payMonth");
+ monthSelect.innerHTML=months.map((x,i)=>`<option value="${i}">${x}</option>`).join("");
+ monthSelect.value=month;
+
+ const yearSelect=document.getElementById("payYear");
+ const now=new Date().getFullYear();
+ let ys="";
+ for(let y=now-3;y<=now+2;y++)ys+=`<option value="${y}">${y}</option>`;
+ yearSelect.innerHTML=ys;
+ yearSelect.value=year;
+
+ const p=getRecord(id,month,year);
+
+ document.getElementById("rentRequired").value=p?p.rentRequired:s.rent;
+ document.getElementById("rentPaid").value=p?p.rentPaid:0;
+ document.getElementById("electricRequired").value=p?p.electricRequired:0;
+ document.getElementById("electricPaid").value=p?p.electricPaid:0;
+ document.getElementById("paymentDate").value=p&&p.paymentDate?p.paymentDate:new Date().toISOString().split("T")[0];
+ document.getElementById("paymentNote").value=p?p.note:"";
+
+ document.getElementById("paymentTitle").textContent="دفعة "+s.name;
+
+ closeModal("profileModal");
+ openModal("paymentModal");
+}
+
+function savePayment(){
+ const studentId=document.getElementById("payStudentId").value;
+ const month=Number(document.getElementById("payMonth").value);
+ const year=Number(document.getElementById("payYear").value);
+
+ const data={
+   studentId,
+   month,
+   year,
+   rentRequired:Number(document.getElementById("rentRequired").value||0),
+   rentPaid:Number(document.getElementById("rentPaid").value||0),
+   electricRequired:Number(document.getElementById("electricRequired").value||0),
+   electricPaid:Number(document.getElementById("electricPaid").value||0),
+   paymentDate:document.getElementById("paymentDate").value,
+   note:document.getElementById("paymentNote").value.trim()
+ };
+
+ const index=payments.findIndex(p=>p.studentId==studentId && p.month==month && p.year==year);
+
+ if(index>=0)payments[index]=data;
+ else payments.push(data);
+
+ save();
+ closeModal("paymentModal");
+ openProfile(studentId);
 }
 
 function deleteStudent(id){
-  if(confirm("هل تريدين حذف الطالبة؟")){
-    students=students.filter(s=>s.id!==id);
-    payments=payments.filter(p=>p.studentId!==id);
-    save();
-    render();
-  }
+ const s=students.find(x=>x.id==id);
+ if(!s)return;
+
+ if(confirm("متأكدة بدك تحذفي "+s.name+" وكل سجل دفعاتها؟")){
+   students=students.filter(x=>x.id!=id);
+   payments=payments.filter(x=>x.studentId!=id);
+   currentProfile=null;
+   save();
+   closeModal("profileModal");
+ }
 }
 
-function isPaid(studentId,month){
-  return payments.some(p=>p.studentId===studentId && p.month===month);
+function backupData(){
+ const data={
+   app:"UNI NEST",
+   date:new Date().toISOString(),
+   students,
+   payments
+ };
+
+ const blob=new Blob([JSON.stringify(data,null,2)],{type:"application/json"});
+ const url=URL.createObjectURL(blob);
+ const a=document.createElement("a");
+ a.href=url;
+ a.download="UNI-NEST-Backup-"+new Date().toISOString().split("T")[0]+".json";
+ a.click();
+ URL.revokeObjectURL(url);
 }
 
-function togglePayment(studentId,month){
-  const existing=payments.findIndex(p=>p.studentId===studentId && p.month===month);
+function restoreData(event){
+ const file=event.target.files[0];
+ if(!file)return;
 
-  if(existing>=0){
-    payments.splice(existing,1);
-  }else{
-    payments.push({
-      id:Date.now(),
-      studentId,
-      month,
-      date:new Date().toLocaleDateString("ar")
-    });
-  }
+ if(!confirm("استرجاع النسخة سيستبدل البيانات الموجودة حالياً. متابعة؟")){
+   event.target.value="";
+   return;
+ }
 
-  save();
-  render();
+ const reader=new FileReader();
+ reader.onload=function(e){
+   try{
+     const data=JSON.parse(e.target.result);
+     if(!Array.isArray(data.students)||!Array.isArray(data.payments))throw new Error();
+     students=data.students;
+     payments=data.payments;
+     save();
+     alert("تم استرجاع البيانات بنجاح ✓");
+   }catch{
+     alert("الملف غير صالح.");
+   }
+ };
+ reader.readAsText(file);
 }
 
-function render(){
-  document.getElementById("studentCount").textContent=students.length;
-
-  const monthly=students.reduce((sum,s)=>sum+s.rent,0);
-  document.getElementById("monthlyTotal").textContent=monthly.toLocaleString()+" ₪";
-
-  const currentMonth=months[new Date().getMonth()];
-  let owed=0;
-
-  students.forEach(s=>{
-    if(!isPaid(s.id,currentMonth)) owed+=s.rent;
-  });
-
-  document.getElementById("owedTotal").textContent=owed.toLocaleString()+" ₪";
-
-  const list=document.getElementById("studentsList");
-
-  if(students.length===0){
-    list.innerHTML='<div class="empty">لا توجد طالبات حاليًا<br>أضيفي أول طالبة عند بدء السكن 🌷</div>';
-  }else{
-    list.innerHTML=students.map(s=>`
-      <div class="student">
-        <div class="student-top">
-          <div>
-            <h3>${s.name}</h3>
-            <div class="muted">الغرفة: ${s.room}</div>
-            <div class="muted">الإيجار: ${s.rent.toLocaleString()} ₪ شهريًا</div>
-          </div>
-          <button class="delete" onclick="deleteStudent(${s.id})">حذف</button>
-        </div>
-
-        <div class="months">
-          ${months.map(m=>`
-            <div
-              class="month ${isPaid(s.id,m)?"paid":"unpaid"}"
-              onclick="togglePayment(${s.id},'${m}')">
-              ${m}<br>
-              ${isPaid(s.id,m)?"✓ مدفوع":"غير مدفوع"}
-            </div>
-          `).join("")}
-        </div>
-      </div>
-    `).join("");
-  }
-
-  const overview=document.getElementById("overview");
-
-  if(students.length===0){
-    overview.innerHTML='<div class="empty">السكن جديد ولا توجد طالبات مسجلات حاليًا.</div>';
-  }else{
-    overview.innerHTML=students.map(s=>`
-      <div class="payment-row">
-        <span><b>${s.name}</b><br><span class="muted">${s.room}</span></span>
-        <span class="${isPaid(s.id,currentMonth)?"status-paid":""}">
-          ${isPaid(s.id,currentMonth)?"مدفوع":"غير مدفوع"}
-        </span>
-      </div>
-    `).join("");
-  }
-
-  const pList=document.getElementById("paymentsList");
-
-  if(payments.length===0){
-    pList.innerHTML='<div class="empty">لا توجد دفعات مسجلة بعد.</div>';
-  }else{
-    pList.innerHTML=payments.slice().reverse().map(p=>{
-      const s=students.find(x=>x.id===p.studentId);
-      if(!s)return "";
-      return `
-        <div class="payment-row">
-          <span><b>${s.name}</b><br><span class="muted">${p.month}</span></span>
-          <span>${s.rent.toLocaleString()} ₪<br><span class="status-paid">مدفوع</span></span>
-        </div>
-      `;
-    }).join("");
-  }
+function showPage(id,el){
+ document.querySelectorAll(".page").forEach(p=>p.classList.remove("active"));
+ document.getElementById(id).classList.add("active");
+ document.querySelectorAll(".nav").forEach(n=>n.classList.remove("active"));
+ el.classList.add("active");
+ renderAll();
 }
 
-render();
+function openModal(id){
+ document.getElementById(id).classList.add("show");
+}
+
+function closeModal(id){
+ document.getElementById(id).classList.remove("show");
+}
+
+function escapeHtml(text){
+ return String(text??"")
+ .replaceAll("&","&amp;")
+ .replaceAll("<","&lt;")
+ .replaceAll(">","&gt;")
+ .replaceAll('"',"&quot;")
+ .replaceAll("'","&#039;");
+}
+
+document.querySelectorAll(".modal").forEach(m=>{
+ m.addEventListener("click",e=>{
+   if(e.target===m)m.classList.remove("show");
+ });
+});
+
+renderAll();
 </script>
 
 </body>
